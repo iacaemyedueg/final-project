@@ -1,0 +1,339 @@
+/* src/Component/Collection/Collection.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --accent-brown: #6b4f3b;
+  --muted: #7a6a5b;
+}
+
+/* سكشن كامل */
+.collection-section {
+  padding: 40px 26px 40px;
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* العنوان */
+.collection-header {
+  text-align: center;
+  margin: 20px 0 20px 20px;
+}
+
+.collection-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 30px;
+  margin: 2px;
+}
+
+/* الخط اللي تحت العنوان مع النقطة */
+.collection-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 9px;
+  width: 140px;
+  height: 2px;
+  background: #444;
+}
+.collection-title::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #444;
+}
+
+/* كروت الكلكشن */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 100px;
+}
+
+.collection-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+}
+
+/* صورة الكارت */
+.collection-img {
+  width: 100%;
+  height:390px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* الجريدنت الأسود */
+.collection-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* النص على الصورة */
+.collection-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+}
+.collection-name {
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.collection-price {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* Hover */
+.collection-card:hover .collection-img {
+  transform: scale(1.05);
+}
+
+/* ====== بانر Big Sale ====== */
+.collection-sale {
+  margin-top: 20px;
+  padding: 60px 60px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(247, 233, 221, 1) 0%,
+    rgba(243, 217, 199, 1) 25%,
+    rgba(236, 211, 196, 1) 50%,
+    rgba(245, 230, 216, 1) 75%,
+    rgba(248, 239, 230, 1) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  position: relative;
+  overflow: visible;
+  margin-bottom: 100px;
+}
+
+/* البلوك اللي جواه الكلام كله */
+.sale-text {
+  max-width: 700px;
+  margin-right: 110px;
+  color: var(--accent-brown);
+  z-index: 1;
+  text-align: center;
+}
+
+/* العنوان + التاريخ في نفس السطر */
+.sale-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+  display: inline-block;
+}
+
+.sale-date {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 14px;
+}
+
+/* باقي السطور تحتهم عادي في النص */
+.sale-line {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.sale-line span {
+  font-weight: bold;
+}
+
+.sale-foot {
+  font-size: 14px;
+  margin: 6px 0 0;
+}
+
+/* الدايرة اللي فيها صورة */
+.sale-circle-wrap {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  right: -60px;
+  bottom: -50px;
+}
+.sale-circle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ====== BENEFITS ROW + SUBSCRIBE ====== */
+
+.benefits-section {
+  padding: 32px 0 48px;
+  background: #fff;
+}
+
+/* كروت Free Delivery ... */
+.benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.benefit-card {
+  background: #5a2f1f;
+  color: #fff;
+  min-width: 180px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  font-size: 14px;
+}
+
+.benefit-icon {
+  font-size: 25px;
+  display: inline-flex;
+}
+
+.benefit-title {
+  font-weight: 600;
+}
+
+/* صندوق الإيميل */
+.subscribe-box {
+  text-align: center;
+  margin-top: 9px;
+}
+
+.subscribe-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 29px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.subscribe-text {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 19px;
+}
+
+/* فورم الإيميل */
+.subscribe-form {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.subscribe-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.subscribe-btn {
+  border: none;
+  outline: none;
+  padding: 12px 32px;
+  background: #5a2f1f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
+.subscribe-btn:hover {
+  opacity: 0.9;
+}
+
+/* ريسبونسيف */
+@media (max-width: 991px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collection-sale {
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 40px;
+  }
+
+  .sale-circle-wrap {
+    position: static;
+    width: 220px;
+    height: 220px;
+    margin: 16px auto 0;
+  }
+
+  .sale-text {
+    max-width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .collection-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .collection-section {
+    padding-inline: 16px;
+  }
+
+  /* الفورم تبقى تحت بعض على الموبايل */
+  .subscribe-form {
+    flex-direction: column;
+    border-radius: 16px;
+  }
+
+  .subscribe-input,
+  .subscribe-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

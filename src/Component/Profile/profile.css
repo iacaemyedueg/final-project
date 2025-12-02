@@ -1,0 +1,586 @@
+/* ===== COMPACT STYLES (Mobile First) ===== */
+.profile-container {
+  background: #f8f9fa;
+  min-height: fit-content;
+  padding: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-header {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #6F4531;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+  border: 2px solid #e9ecef;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  margin: 0 0 4px 0;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.user-email {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.edit-btn {
+  background: #6F4531;
+  color: white;
+  border: 1px solid #6F4531;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.edit-btn:hover {
+  background: #5a3826;
+  color: white;
+}
+
+.section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid #e9ecef;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.add-btn {
+  background: #6F4531;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.add-btn:hover {
+  background: #5a3826;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 25px 15px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+
+.empty-title {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.empty-description {
+  margin: 0 0 15px 0;
+  color: #6c757d;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+
+.cta-btn {
+  background: #6F4531;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: #5a3826;
+}
+
+/* ===== EDIT PROFILE MODAL STYLES ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.edit-profile-modal {
+  background: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  padding: 20px 20px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6F4531;
+  background: white;
+}
+
+.email-note {
+  margin: 6px 0 0 0;
+  color: #6c757d;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.cancel-btn {
+  flex: 1;
+  background: white;
+  color: #6F4531;
+  border: 1px solid #6F4531;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.save-btn {
+  flex: 1;
+  background: #6F4531;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== ADD ADDRESS MODAL STYLES ===== */
+.add-address-modal {
+  background: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.add-address-modal .modal-header {
+  padding: 20px 20px 15px;
+  border-bottom: 1px solid #e9ecef;
+  position: relative;
+}
+
+.add-address-modal .modal-title {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.address-default-badge {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.default-badge-text {
+  background: #e8f5e8;
+  color: #2d5a2d;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.add-address-modal .modal-form {
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 35px;
+  cursor: pointer;
+}
+
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phone-prefix {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-right: none;
+  padding: 10px 12px;
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.phone-input {
+  border-radius: 0;
+  border-left: none;
+  flex: 1;
+}
+
+.phone-input:focus {
+  border-color: #6F4531;
+  border-left: none;
+}
+
+/* ===== ADDRESS CARDS STYLES ===== */
+.addresses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.address-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.address-name {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.default-badge {
+  background: #e8f5e8;
+  color: #2d5a2d;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.address-details {
+  margin-bottom: 15px;
+}
+
+.address-line {
+  margin: 0 0 4px 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.address-phone {
+  margin: 8px 0 0 0;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.address-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-address-btn,
+.delete-address-btn,
+.set-default-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.edit-address-btn {
+  background: #6F4531;
+  color: white;
+}
+
+.edit-address-btn:hover {
+  background: #5a3826;
+}
+
+.delete-address-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-address-btn:hover {
+  background: #c82333;
+}
+
+.set-default-btn {
+  background: white;
+  color: #6F4531;
+  border: 1px solid #6F4531;
+}
+
+.set-default-btn:hover {
+  background: #f8f9fa;
+}
+
+/* ===== EDIT ADDRESS MAIN BUTTON STYLES ===== */
+.edit-address-main-btn {
+  background: white;
+  color: #6F4531;
+  border: 1px solid #6F4531;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.edit-address-main-btn:hover {
+  background: #6F4531;
+  color: white;
+}
+
+/* Remove the old address actions styles since we removed the buttons */
+.address-actions {
+  display: none;
+}
+
+/* ===== TABLET STYLES ===== */
+@media (min-width: 768px) {
+  .profile-container {
+    padding: 20px;
+  }
+  
+  .profile-header {
+    padding: 25px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .section {
+    padding: 25px;
+  }
+  
+  .section-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-btn {
+    width: auto;
+    padding: 8px 20px;
+  }
+  
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 1.7rem;
+  }
+  
+  .user-name {
+    font-size: 1.3rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  .empty-state {
+    padding: 30px 20px;
+  }
+}
+
+/* ===== DESKTOP STYLES ===== */
+@media (min-width: 1024px) {
+  .profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px 20px;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 1.9rem;
+  }
+  
+  .user-name {
+    font-size: 1.4rem;
+  }
+}
+
+/* Responsive Design for Address Cards */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .add-address-modal {
+    max-width: 400px;
+  }
+  
+  .address-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .address-actions {
+    flex-direction: column;
+  }
+  
+  .edit-address-btn,
+  .delete-address-btn,
+  .set-default-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-address-modal {
+    max-width: 350px;
+  }
+  
+  .add-address-modal .modal-form {
+    padding: 15px;
+  }
+}

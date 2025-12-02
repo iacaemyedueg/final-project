@@ -1,0 +1,59 @@
+{
+  "products": {
+    "title": "منتجاتنا",
+    "filterBySize": "تصفية حسب المقاس",
+    "size": "المقاس",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
+    "clearFilter": "مسح الفلتر",
+    "filteredBy": "تمت التصفية حسب",
+    "noProducts": "لم يتم العثور على منتجات",
+    "noProductsMatch": "لا توجد منتجات تطابق الفلتر المحدد.",
+    "showing": "عرض",
+    "of": "من",
+    "total": "الإجمالي",
+    "addToFavorite": "إضافة إلى المفضلة",
+    "viewDetails": "عرض التفاصيل",
+    "discount": "{{discount}}%-"
+  },
+  "common": {
+    "close": "إغلاق"
+  },
+  "productDetails": {
+    "backToProducts": "العودة إلى المنتجات",
+    "productNotFound": "المنتج غير موجود",
+    "productSpecifications": "مواصفات المنتج",
+    "material": "المادة",
+    "madeIn": "مصنوع في",
+    "careInstructions": "تعليمات العناية",
+    "customizeYourRug": "تخصيص سجادتك",
+    "width": "العرض (سم)",
+    "widthHint": "اختر أحد المقاسات القياسية أدناه",
+    "height": "الارتفاع (سم)",
+    "heightHint": "نحن نصنع حسب متطلبات الارتفاع الدقيقة الخاصة بك",
+    "customHeightAvailable": "الارتفاع المخصص متاح - اتصل بنا للتفاصيل",
+    "productFeatures": "مميزات المنتج",
+    "viewImage": "عرض الصورة {{number}}",
+    "discount": "{{discount}}%-"
+  },
+  
+  "heroTitle": "مصنع القمر",
+  "heroDesc": "اكتشف أكثر متجر شامل للحصير البلاستيك",
+  "heroBtn": "استكشف المزيد",
+  "orderTracking": "تتبع الطلب",
+  "myAccount": "حسابي",
+  "superSale": "خصم 30٪ على السلع",
+  "needHelp": "تحتاج مساعدة؟ اتصل بنا",
+  "home": "الرئيسية",
+  "about": "عن المتجر",
+  "shop ": "تسوق ",
+  "contact": "اتصل بنا",
+  "browseCategory ": "تصفح جميع الفئات ",
+  "search": "بحث",
+    "browse1":"حصير منازل",
+  "browse2":"حصير مساجد",
+  "browse3":"حصير رحلات"
+
+
+
+}
