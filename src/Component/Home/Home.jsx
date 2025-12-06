@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import Categories from "../Categories/Categories";
 import Collection from "../Collection/Collection";
 import bgVideo from "../../assets/bgVideo.mp4";
+import NewArrivals from "../NewArrivals/NewArrivals";
+import About from "../About/About";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -35,6 +37,8 @@ export default function Home() {
 
       {/* Collection Component */}
       <Collection />
+        <NewArrivals />
+         <About />
     </div>
   );
 }

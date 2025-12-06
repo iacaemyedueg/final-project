@@ -1,0 +1,90 @@
+.about-hero-section {
+background-color: #fdfbf7;
+  overflow: hidden;
+}
+
+.about-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 100px 100px 0 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  margin: 0 auto;
+  transition: transform 0.4s ease;
+}
+
+.about-image-wrapper:hover {
+  transform: translateY(-6px);
+}
+
+.about-hero-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.about-image-wrapper:hover .about-hero-img {
+  transform: scale(1.05);
+}
+
+.discover-btn {
+  min-width: 120px;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: 0.3s ease;
+  background-color: #ffffff !important;
+  color: #7d4e2c !important;
+  border: #7d4e2c solid 2px !important;
+}
+
+.discover-btn:hover {
+  background-color: #7d4e2c !important;
+  color: #fff !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18) !important;
+}
+
+html[dir="rtl"] .text-lg-start {
+  text-align: right !important;
+}
+html[dir="rtl"] .justify-content-lg-start {
+  justify-content: flex-end !important;
+}
+html[dir="rtl"] .about-image-wrapper {
+  margin-right: 0 !important;
+  margin-left: auto;
+}
+
+@media (max-width: 991.98px) {
+  .about-image-wrapper {
+    max-width: 460px;
+    border-radius: 30px 30px 0 0;
+  }
+  .about-hero-img {
+    height: 380px;
+  }
+  .discover-btn {
+    min-width: 260px;
+  }
+  .display-6 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-hero-img {
+    height: 320px;
+  }
+  .about-image-wrapper {
+    max-width: 100%;
+    border-radius: 24px 24px 0 0;
+  }
+  .display-6 {
+    font-size: 2rem;
+  }
+  .lead {
+    font-size: 1.05rem !important;
+  }
+}

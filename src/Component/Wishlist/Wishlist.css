@@ -1,0 +1,128 @@
+:root {
+  --brown-light: #b08968;
+  --brown-mid: #6F4531;
+  --brown-dark: #5a4636;
+  --danger-red: #dc3545;
+}
+
+.wishlist-container {
+  padding-top: 2rem;
+}
+
+.wishlist-title {
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem);
+  letter-spacing: 1px;
+  color: var(--brown-dark);
+}
+
+.wishlist-divider {
+  border-color: var(--brown-light);
+  opacity: 0.3;
+}
+
+/* Empty Wishlist Styles */
+.empty-wishlist {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-wishlist-icon {
+  font-size: 4rem;
+  color: #dee2e6;
+  margin-bottom: 1.5rem;
+}
+
+.empty-wishlist-title {
+  color: var(--brown-dark);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.empty-wishlist-text {
+  color: var(--brown-mid);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* RTL Support */
+[dir="rtl"] .wishlist-heart-btn {
+  right: auto;
+  left: 12px;
+}
+
+[dir="rtl"] .wishlist-card .btn i {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wishlist-container {
+    padding-top: 1rem;
+  }
+  
+  .wishlist-title {
+    font-size: 1.5rem;
+  }
+  
+  .wishlist-card-image {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .wishlist-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .empty-wishlist {
+    padding: 2rem 1rem;
+  }
+  
+  .empty-wishlist-icon {
+    font-size: 3rem;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .wishlist-remove-btn {
+  right: auto;
+  left: 12px;
+}
+
+[dir="rtl"] .wishlist-card .btn i {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wishlist-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .wishlist-remove-btn {
+    opacity: 1; /* Always show on mobile */
+  }
+  
+  .card-image-wrapper {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .wishlist-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .empty-wishlist {
+    padding: 2rem 1rem;
+  }
+  
+  .empty-wishlist-icon {
+    font-size: 3rem;
+  }
+}

@@ -1,18 +1,19 @@
+// src/Component/Collection/Collection.jsx
 import React from "react";
 import "./Collection.css";
 import {
-  FaTruck,
   FaMoneyBillWave,
   FaGlobeAsia,
-  FaRedoAlt,
   FaSmile,
+  FaArrowRight,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 const localImage = (num) =>
   new URL(`../../assets/carpetimg/carpet${num}.jpg`, import.meta.url).href;
 
-
+// كروت الكلكشن
 const collections = [
   { name: "DOLCE",   price: "Starting At Rs 1099", img: localImage(6) },
   { name: "IMPERIA", price: "Starting At Rs 1099", img: localImage(8) },
@@ -21,37 +22,42 @@ const collections = [
 ];
 
 const benefits = [
-  { icon: <FaTruck />,          title: "Free Delivery" },
-  { icon: <FaMoneyBillWave />,  title: "COD Available" },
-  { icon: <FaGlobeAsia />,      title: "Delivery Across India" },
-  { icon: <FaRedoAlt />,        title: "Easy Return" },
-  { icon: <FaSmile />,          title: "Good Quality" },
+  { icon: <FaGlobeAsia />,     title: "Delivery Across World" },
+  { icon: <FaMoneyBillWave />, title: "COD Available" },
+  { icon: <FaSmile />,         title: "Good Quality" },
 ];
-
 
 const saleImage = localImage(21);
 
 export default function Collection() {
+  const navigate = useNavigate();
+
+  const handleNavigate = (index) => {
+    
+    navigate(`/benefit/${index}`);
+  };
+
   return (
     <section className="collection-section">
       <div className="container">
-      
+
         <header className="collection-header">
           <h2 className="collection-title">Shop By Collection</h2>
         </header>
 
-      
         <div className="collection-grid">
           {collections.map((item, i) => (
             <div key={i} className="collection-card">
+
               <img
-                src={item.img}
-                alt={item.name}
-                className={`collection-img`}
-              
-              />
+               src={item.img}
+              alt={item.name}
+               className="collection-img" />
+
               <div className="collection-overlay" />
+
               <div className="collection-info">
+                
                 <div className="collection-name">{item.name}</div>
                 <div className="collection-price">{item.price}</div>
               </div>
@@ -69,26 +75,36 @@ export default function Collection() {
             </p>
             <p className="sale-foot">
               Don’t Miss Out On Incredible Discounts!
-            </p>
+             </p>
           </div>
 
           <div className="sale-circle-wrap">
-            <img
-              src={saleImage}
-              alt="Big sale rug"
-              className="sale-circle-img"
-            />
+            <img 
+          src={saleImage}
+           alt="Big sale rug"
+           className="sale-circle-img"
+           />
           </div>
         </div>
 
         {/* ====== BENEFITS + SUBSCRIBE ====== */}
         <section className="benefits-section">
-      
+         
           <div className="benefits-grid">
             {benefits.map((item, i) => (
               <div key={i} className="benefit-card">
-                <span className="benefit-icon">{item.icon}</span>
-                <span className="benefit-title">{item.title}</span>
+                <div className="benefit-left">
+                  <span className="benefit-icon">{item.icon}</span>
+                  <span className="benefit-title">{item.title}</span>
+                </div>
+
+                <button
+                  className="benefit-arrow"
+                  onClick={() => handleNavigate(i)}
+                  aria-label={`Open ${item.title} details`}
+                >
+                  <FaArrowRight />
+                </button>
               </div>
             ))}
           </div>
@@ -97,19 +113,19 @@ export default function Collection() {
           <div className="subscribe-box">
             <h3 className="subscribe-title">Exclusively For You!</h3>
             <p className="subscribe-text">
-              Be The First To Know About New Collections,<br/> Launches, Sales, And
-              Much More!
+              Be The First To Know About New Collections,
+              <br /> Launches, Sales, And Much More!
             </p>
 
             <form
-              className="subscribe-form"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="subscribe-input"
-              />
+             className="subscribe-form" 
+             onSubmit={(e) => e.preventDefault()}
+             >
+              
+            <input
+             type="email"
+             placeholder="Email Address"
+             className="subscribe-input" />
               <button className="subscribe-btn">Subscribe</button>
             </form>
           </div>

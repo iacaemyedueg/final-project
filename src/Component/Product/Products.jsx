@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useWishlist } from '../../Context/WishlistContext';
 import '../Product/products.css';
 
 // Import your images
@@ -27,8 +28,6 @@ const mockProducts = [
     description: "Beautiful abstract design hand tufted rug",
     image: pr11,
     hoverImage: pr11Hover,
-    sizes: ["60 X 200", "90 X 230", "120 X 300"],
-    discount: 30,
     category: "Homes"
   },
   {
@@ -37,8 +36,6 @@ const mockProducts = [
     description: "Traditional handmade wool kilim rug",
     image: pr21,
     hoverImage: pr22Hover,
-    sizes: ["150 X 150", "180 X 200", "210 X 400"],
-    discount: 52,
     category: "Homes"
   },
   {
@@ -47,8 +44,6 @@ const mockProducts = [
     description: "Authentic Afghani handmade rug",
     image: pr31,
     hoverImage: pr32Hover,
-    sizes: ["150 X 230", "180 X 280", "210 X 300"],
-    discount: 30,
     category: "Homes"
   },
   {
@@ -57,8 +52,6 @@ const mockProducts = [
     description: "Luxurious Afghani plush rug",
     image: pr11,
     hoverImage: pr11Hover,
-    sizes: ["90 X 200", "180 X 300"],
-    discount: 27,
     category: "Homes"
   },
   {
@@ -67,8 +60,6 @@ const mockProducts = [
     description: "Elegant Art Deco style rug",
     image: pr21,
     hoverImage: pr22Hover,
-    sizes: ["150 X 230", "180 X 280", "210 X 300"],
-    discount: 35,
     category: "Homes"
   },
   {
@@ -77,8 +68,6 @@ const mockProducts = [
     description: "Contemporary geometric pattern rug",
     image: pr31,
     hoverImage: pr32Hover,
-    sizes: ["60 X 230", "90 X 280", "210 X 300"],
-    discount: 25,
     category: "Homes"
   },
   {
@@ -87,8 +76,6 @@ const mockProducts = [
     description: "Contemporary geometric pattern rug",
     image: pr41,
     hoverImage: pr42Hover,
-    sizes: ["60 X 230", "90 X 280", "210 X 300"],
-    discount: 25,
     category: "Homes"
   },
   {
@@ -97,8 +84,6 @@ const mockProducts = [
     description: "Contemporary geometric pattern rug",
     image: pr51,
     hoverImage: pr52Hover,
-    sizes: ["60 X 230", "90 X 280", "210 X 300"],
-    discount: 25,
     category: "mosque"
   },
   {
@@ -107,8 +92,6 @@ const mockProducts = [
     description: "Contemporary geometric pattern rug",
     image: pr61,
     hoverImage: pr62Hover,
-    sizes: ["60 X 230", "90 X 280", "210 X 300"],
-    discount: 25,
     category: "mosque"
   },
   {
@@ -117,8 +100,6 @@ const mockProducts = [
     description: "Contemporary geometric pattern rug",
     image: pr71,
     hoverImage: pr72Hover,
-    sizes: ["60 X 230", "90 X 280", "210 X 300"],
-    discount: 25,
     category: "Travels"
   }
 ];
@@ -130,27 +111,62 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
-  const [selectedSize, setSelectedSize] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showAllSizes, setShowAllSizes] = useState(false);
-  const [showMobileFilter, setShowMobileFilter] = useState(false);
+
+  // Favorite state
+  const [favorites, setFavorites] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupAnimation, setPopupAnimation] = useState('');
+  const popupTimeoutRef = useRef(null);
+  const [currentFavoriteState, setCurrentFavoriteState] = useState(false);
+  const { isInWishlist, toggleWishlist } = useWishlist();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const formatSize = (size) => {
-    if (i18n.language === 'ar') {
-      return ` ${size.replace(' X ', '×')}`;
+  // Handle favorite click with popup
+  const handleFavoriteClick = (product, e) => {
+    if (e) {
+      e.stopPropagation();
     }
-    return size;
+
+    const newFavoriteState = toggleWishlist(product);
+
+    const message = newFavoriteState
+      ? t('wishlist.addedToFavorite')
+      : t('wishlist.removedFromFavorite');
+
+    // Clear any existing timeout
+    if (popupTimeoutRef.current) {
+      clearTimeout(popupTimeoutRef.current);
+    }
+
+    setPopupMessage(message);
+    setPopupAnimation('fade-in');
+    setShowPopup(true);
+    setCurrentFavoriteState(newFavoriteState);
+
+    popupTimeoutRef.current = setTimeout(() => {
+      setPopupAnimation('fade-out');
+
+      popupTimeoutRef.current = setTimeout(() => {
+        setShowPopup(false);
+        setPopupAnimation('');
+        popupTimeoutRef.current = null;
+      }, 300);
+    }, 700);
   };
 
-  // Get unique sizes from filtered products (only for the current category)
-  const availableSizes = [...new Set(filteredProducts.flatMap(product => product.sizes))];
-
-  // Show first 6 sizes by default, or all if showAllSizes is true
-  const displayedSizes = showAllSizes ? availableSizes : availableSizes.slice(0, 6);
+  // Cleanup timeouts on component unmount
+  useEffect(() => {
+    return () => {
+      if (popupTimeoutRef.current) {
+        clearTimeout(popupTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -190,43 +206,10 @@ export default function Products() {
     setDisplayedProducts(productsToShow);
   }, [filteredProducts, currentPage, productsPerPage]);
 
-  // Filter products by size (within the current category)
-  const filterBySize = (size) => {
-    if (selectedSize === size) {
-      setSelectedSize(null);
-      // Reset to show all products in the current category
-      if (selectedCategory) {
-        const filtered = products.filter(product =>
-          product.category === selectedCategory
-        );
-        setFilteredProducts(filtered);
-      } else {
-        setFilteredProducts(products);
-      }
-    } else {
-      setSelectedSize(size);
-      const filtered = products.filter(product =>
-        product.sizes.includes(size) &&
-        (!selectedCategory || product.category === selectedCategory)
-      );
-      setFilteredProducts(filtered);
-    }
-    // Reset to first page when filtering
-    setCurrentPage(1);
-  };
-
-  // Clear all filters
+  // Clear category filter
   const clearFilters = () => {
-    setSelectedSize(null);
-    // If we have a selected category, only clear size filter but keep category
-    if (selectedCategory) {
-      const filtered = products.filter(product =>
-        product.category === selectedCategory
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products);
-    }
+    setSelectedCategory(null);
+    setFilteredProducts(products);
     // Reset to first page when clearing filters
     setCurrentPage(1);
   };
@@ -279,11 +262,6 @@ export default function Products() {
     return pageNumbers;
   };
 
-  // Toggle mobile filter sidebar
-  const toggleMobileFilter = () => {
-    setShowMobileFilter(!showMobileFilter);
-  };
-
   // Navigate to product details
   const goToProductDetails = (productId, productCategory, e) => {
     if (e) {
@@ -322,117 +300,37 @@ export default function Products() {
         </div>
       </div>
 
-      {/* Mobile Filter Button */}
-      <div className="row d-lg-none mb-3">
+      {/* Products Grid */}
+      <div className="row">
         <div className="col-12">
-          <button
-            className="filter-toggle-btn w-100 d-flex align-items-center justify-content-center gap-2"
-            onClick={toggleMobileFilter}
-          >
-            <i className="fas fa-filter"></i>
-            {t('products.filterBySize')}
-          </button>
-        </div>
-      </div>
-
-      <div className="row g-3 g-md-4">
-        {/* Desktop Sidebar - Only show if we have products to filter */}
-        {filteredProducts.length > 0 && (
-          <div className="col-lg-3 d-none d-lg-block">
-            <div className="filter-sidebar-desktop h-60">
-              <div className="filter-content">
-                <h3 className="filter-title">{t('products.size')}</h3>
-
-                <div className="size-filters">
-                  {displayedSizes.map((size) => (
-                    <button
-                      key={size}
-                      className={`size-filter-btn w-100 ${selectedSize === size ? 'active' : ''}`}
-                      onClick={() => filterBySize(size)}
-                    >
-                      {formatSize(size)}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="filter-actions">
-                  {availableSizes.length > 6 && (
-                    <button
-                      className="show-more-btn w-100"
-                      onClick={() => setShowAllSizes(!showAllSizes)}
-                    >
-                      {showAllSizes ? t('products.showLess') : `${t('products.showMore')} (+${availableSizes.length - 6})`}
-                    </button>
-                  )}
-
-                  {selectedSize && (
-                    <button className="clear-filter-btn w-100" onClick={clearFilters}>
-                      {t('products.clearFilter')}
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Products Grid Column */}
-        <div className={filteredProducts.length > 0 ? "col-12 col-lg-9" : "col-12"}>
           <div className="products-grid-container">
-            {/* Active Filter Display */}
-            {/* Active Filter Display - Only show for size filter, not category */}
-            {selectedSize && (
-              <div className="active-filter mb-3">
-                <span className="fw-semibold">
-                  {i18n.language === 'ar' ?
-                    `${selectedSize.replace(' X ', 'X')} :${t('products.filteredBy')}` :
-                    `${t('products.filteredBy')}: ${selectedSize}`
-                  }
-                </span>
-                <button className="clear-active-filter btn btn-sm" onClick={clearFilters}>
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-            )}
+
             {/* Products Grid */}
-            <div className="row g-3 g-md-4">
+            <div className="row g-4 g-md-4">
               {displayedProducts.length > 0 ? (
                 displayedProducts.map((product) => (
                   <div key={product.id} className="col-12 col-sm-6 col-xl-4">
                     <div
                       className="product-card h-100"
-                      onClick={() => goToProductDetails(product.id)}
+                      onClick={() => goToProductDetails(product.id, product.category)}
                     >
                       <div className="card-image position-relative">
-                        {product.discount && (
-                          <div className="discount-badge position-absolute">
-                            {t('products.discount', { discount: product.discount })}
-                          </div>
-                        )}
-
                         <img src={product.image} alt={product.name} className="main-image w-100 h-100" />
                         <img src={product.hoverImage} alt={product.name} className="hover-image w-100 h-100" />
-
                         <div className="card-actions position-absolute">
-                          <button className="action-btn">
-                            <i className="fas fa-heart"></i>
-                            <span className="action-text">{t('products.addToFavorite')}</span>
+                          <button
+                            className={`action-btn ${isInWishlist(product.id) ? 'favorite-active' : ''}`}
+                            onClick={(e) => handleFavoriteClick(product, e)}
+                          >
+                            <i className={`${isInWishlist(product.id) ? 'fas' : 'far'} fa-heart ${isInWishlist(product.id) ? 'text-danger' : ''}`}></i>
                           </button>
+
                           <button
                             className="action-btn"
-                            onClick={(e) => goToProductDetails(product.id, e)}
+                            onClick={(e) => goToProductDetails(product.id, product.category, e)}
                           >
-                            <i className="fas fa-eye"></i>
-                            <span className="action-text">{t('products.viewDetails')}</span>
+                            <i className="far fa-eye"></i>
                           </button>
-                        </div>
-
-                        <div className="size-tags position-absolute w-100">
-                          {product.sizes.map((size, index) => (
-                            <span key={index} className="size-tag">
-                              {formatSize(size)}
-                            </span>
-                          ))}
                         </div>
                       </div>
 
@@ -505,52 +403,11 @@ export default function Products() {
         </div>
       </div>
 
-      {/* Mobile Filter Overlay */}
-      {showMobileFilter && (
-        <div className="mobile-filter-overlay">
-          <div className="mobile-filter-sidebar">
-            <div className="filter-header">
-              <h3 className="mb-0">{t('products.filterBySize')}</h3>
-              <button className="close-filter" onClick={toggleMobileFilter}>
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
-
-            <div className="size-filters flex-grow-1">
-              {displayedSizes.map((size) => (
-                <button
-                  key={size}
-                  className={`size-filter-btn w-100 ${selectedSize === size ? 'active' : ''}`}
-                  onClick={() => {
-                    filterBySize(size);
-                    toggleMobileFilter();
-                  }}
-                >
-                  {formatSize(size)}
-                </button>
-              ))}
-            </div>
-
-            <div className="filter-actions">
-              {availableSizes.length > 6 && (
-                <button
-                  className="show-more-btn w-100"
-                  onClick={() => setShowAllSizes(!showAllSizes)}
-                >
-                  {showAllSizes ? t('products.showLess') : `${t('products.showMore')} (+${availableSizes.length - 6})`}
-                </button>
-              )}
-
-              {selectedSize && (
-                <button className="clear-filter-btn w-100" onClick={clearFilters}>
-                  {t('products.clearFilter')}
-                </button>
-              )}
-
-              <button className="close-bottom-btn w-100" onClick={toggleMobileFilter}>
-                {t('common.close')}
-              </button>
-            </div>
+      {showPopup && (
+        <div className="products-popup-overlay">
+          <div className={`products-popup ${currentFavoriteState ? 'products-popup-success' : 'products-popup-remove'} ${popupAnimation}`}>
+            <i className={`fas ${currentFavoriteState ? 'fa-heart' : 'fa-heart-broken'} products-popup-icon`}></i>
+            <span className="products-popup-text">{popupMessage}</span>
           </div>
         </div>
       )}

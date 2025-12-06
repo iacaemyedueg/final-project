@@ -9,6 +9,8 @@ import Notfound from './Component/Notfound/Notfound';
 import SignIn from './Component/SignIn/Signin';
 import SignUp from './Component/SignUp/SignUp';
 import Profile from "./Component/Profile/profile";
+import Wishlist from "./Component/Wishlist/Wishlist";
+import { WishlistProvider } from './Context/WishlistContext';
 
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -24,14 +26,15 @@ const route = createBrowserRouter([
     {path:"signIn", element:<SignIn/>},
     {path:"signUp", element:<SignUp/>},
     { path: "Profile", element: <Profile /> },
+    {path:"wishlist", element:<Wishlist/>},
   ]},
 ])
 
 
 export default function App() {
   return (
-    <>
+  <WishlistProvider>
       <RouterProvider router={route}/>  
-    </>
+    </WishlistProvider>
   )
 }

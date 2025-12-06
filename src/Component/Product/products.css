@@ -55,256 +55,7 @@
   }
 }
 
-/* Filter Sidebar - KEEP */
-.filter-sidebar-desktop {
-    background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-}
-
-.filter-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--brown-dark);
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e9ecef;
-}
-
-/* Size Filters - KEEP */
-.size-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-
-.size-filters::-webkit-scrollbar {
-    width: 6px;
-}
-
-.size-filters::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.size-filters::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
-}
-
-.size-filter-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    color: var(--brown-dark);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
-.size-filter-btn:hover {
-    border-color: var(--brown-mid);
-    color: var(--brown-mid);
-    transform: translateY(-2px);
-}
-
-.size-filter-btn.active {
-    background: var(--brown-mid);
-    border-color: var(--brown-mid);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Filter Actions - KEEP */
-.filter-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-top: 1px solid #e9ecef;
-    padding: 20px;
-}
-
-.show-more-btn {
-    background: transparent;
-    border: 2px dashed #6c757d;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    color: var(--brown-mid);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.show-more-btn:hover {
-    background: #f8f9fa;
-    border-color: var(--brown-mid);
-    color: var(--brown-mid);
-}
-
-.clear-filter-btn {
-    background: transparent;
-    border: 2px solid var(--danger-red);
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    color: var(--danger-red);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.clear-filter-btn:hover {
-    background: var(--danger-red);
-    color: white;
-}
-
-/* Mobile Filter - KEEP */
-.mobile-filter-toggle {
-    display: none;
-}
-
-.filter-toggle-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-weight: 600;
-    color: var(--brown-dark);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.filter-toggle-btn:hover {
-    border-color: var(--brown-mid);
-    color: var(--brown-mid);
-}
-
-.mobile-filter-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.mobile-filter-sidebar {
-    background: white;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #e9ecef;
-    background: #f8f9fa;
-    border-radius: 15px 15px 0 0;
-}
-
-.filter-header h3 {
-    margin: 0;
-    color: var(--brown-dark);
-    font-weight: 700;
-}
-
-.close-filter {
-    background: none;
-    border: none;
-    font-size: 1.3rem;
-    color: var(--brown-mid);
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.close-filter:hover {
-    background: #e9ecef;
-    color: var(--danger-red);
-}
-
-.close-bottom-btn {
-    background: var(--brown-mid);
-    border: none;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.close-bottom-btn:hover {
-    background: var(--brown-dark);
-}
-
-/* Active Filter - KEEP */
-.active-filter {
-    background: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.clear-active-filter {
-    background: none;
-    border: none;
-    color: var(--danger-red);
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.clear-active-filter:hover {
-    background: #ffe6e6;
-}
-
-/* Product Cards - KEEP ALL */
+/* Product Cards  */
 .product-card {
     background: white;
     border-radius: 15px;
@@ -328,12 +79,20 @@
     overflow: hidden;
     background: #f8f9fa;
 }
-
-.main-image,
-.hover-image {
+.main-image{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     position: absolute;
     top: 0;
     left: 0;
@@ -356,23 +115,9 @@
     transform: scale(1.1);
 }
 
-.discount-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: var(--danger-red);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    z-index: 10;
-    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
-}
-
 .card-actions {
     position: absolute;
-    bottom: 70px;
+    bottom: 15px;
     left: 15px;
     display: flex;
     flex-direction: column;
@@ -387,6 +132,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+     color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -398,71 +144,12 @@
 }
 
 .action-btn:hover {
-    width: auto;
-    padding: 0 15px 0 10px;
-    border-radius: 25px;
-    transform: scale(1);
-}
-
-.action-text {
-    position: absolute;
-    left: 100%;
-    opacity: 0;
-    white-space: nowrap;
-    margin-left: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    transition: all 1s ease;
-}
-
-.action-btn:hover .action-text {
-    opacity: 1;
-    position: static;
-}
-
-.size-tags {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.size-tags::-webkit-scrollbar {
-    height: 3px;
-}
-
-.product-card:hover .size-tags {
-    transform: translateX(10px);
-    padding-left: 10px;
-}
-
-.size-tag {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-.size-tag:hover {
+    transform: scale(1.2);
     background: #f8f9fa;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-
+.action-btn.favorite-active .fa-heart {
+    color: var(--danger-red) !important;
+}
 .card-info {
     padding: 20px;
     flex: 1;
@@ -594,29 +281,6 @@
     background: var(--brown-mid);
     color: white;
 }
-/* Fix for size formatting in Arabic - ADD THIS */
-.size-filter-btn,
-.size-tag,
-.active-filter span {
-  direction: ltr !important;
-  unicode-bidi: isolate;
-  text-align: center;
-}
-
-/* Force LTR for sizes even in RTL layout */
-[dir="rtl"] .size-filter-btn,
-[dir="rtl"] .size-tag,
-[dir="rtl"] .active-filter span {
-  direction: ltr !important;
-  unicode-bidi: isolate;
-}
-
-/* Specific fix for the formatSize function display */
-.size-filter-btn span,
-.size-tag span {
-  direction: ltr;
-  unicode-bidi: isolate;
-}
 
 /* Complete RTL fix for action buttons */
 [dir="rtl"] .card-actions {
@@ -646,4 +310,103 @@
   order:-1;
   margin-left: 0;
   margin-right: 0;
+}
+
+/* Clear Filter Button */
+.clear-filter-btn {
+    background: transparent;
+    border: 2px solid var(--danger-red);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--danger-red);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+    background: var(--danger-red);
+    color: white;
+}
+
+/* Products Popup Styles */
+.products-popup-overlay {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none;
+  height: 0;
+}
+
+.products-popup {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Fade In Animation */
+.products-popup.fade-in {
+  animation: popupFadeIn 0.3s ease-out forwards;
+}
+
+/* Fade Out Animation */
+.products-popup.fade-out {
+  animation: popupFadeOut 0.3s ease-in forwards;
+}
+
+.products-popup-icon {
+  font-size: 1.2rem;
+}
+
+.products-popup-success .products-popup-icon {
+  color: #28a745;
+}
+
+.products-popup-remove .products-popup-icon {
+  color: #dc3545;
+}
+
+.products-popup-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.products-popup-success .products-popup-text {
+  color: #28a745;
+}
+
+.products-popup-remove .products-popup-text {
+  color: #dc3545;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes popupFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px) translateZ(0);
+  }
 }

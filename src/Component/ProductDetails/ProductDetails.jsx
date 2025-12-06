@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useWishlist } from '../../Context/WishlistContext';
 import './ProductDetails.css';
 
 // Local static assets
@@ -25,8 +26,6 @@ import pr63 from '../../assets/img/images/mosque/2.1.jpg';
 import pr71 from '../../assets/img/images/Travels/1.2.jpg';
 import pr72 from '../../assets/img/images/Travels/1.1.jpg';
 
-const uploadedImage = '/mnt/data/image.png';
-
 // Mock data - This will be replaced with API call
 const mockProducts = [
   {
@@ -35,12 +34,10 @@ const mockProducts = [
     description: "Handmade Afghani wool carpet, premium quality.",
     fullDescription: "Handmade Afghani wool carpet, premium quality. Hand-knotted of hand-spun, vegetable-dyed wool in Afghanistan.",
     images: [pr11, pr12, pr13],
-    features: ["Handmade", "Traditional Afghan Design", "Durable", "Cultural Heritage"],
     material: "Wool",
     origin: "Afghanistan",
     careInstructions: "Professional cleaning recommended",
     inStock: true,
-    discount: 30,
     soldCount: 10,
     category: "Homes"
   },
@@ -50,12 +47,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr21, pr22, pr23],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "Homes"
   },
@@ -65,12 +60,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr31, pr32, pr33],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "Homes"
   },
@@ -80,12 +73,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr41, pr42, pr43],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "Homes"
   },
@@ -95,12 +86,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr51, pr52, pr53],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "mosque"
   },
@@ -110,12 +99,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr61, pr62, pr63],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "mosque"
   },
@@ -125,12 +112,10 @@ const mockProducts = [
     description: "Beautiful Persian handmade rug.",
     fullDescription: "Traditional Persian design with premium materials.",
     images: [pr71, pr72],
-    features: ["Handmade", "Persian Design", "Premium Wool"],
     material: "Wool",
     origin: "Persia",
     careInstructions: "Dry clean only",
     inStock: true,
-    discount: 20,
     soldCount: 5,
     category: "Travels"
   }
@@ -148,31 +133,75 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(true);
 
-  // Customization state - Only width remains
-  const [selectedWidth, setSelectedWidth] = useState(null);
+  // Favorite state
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [popupAnimation, setPopupAnimation] = useState('');
+  const { isInWishlist, toggleWishlist } = useWishlist();
 
-  // Handle back button click
-  const handleBackToProducts = () => {
-    // Check if we came from a specific category
-    const fromCategory = location.state?.fromCategory;
-    if (fromCategory) {
-      navigate('/products', { state: { category: fromCategory } });
-    } else {
-      navigate('/products');
+  // Refs for timeout management
+  const popupTimeoutRef = useRef(null);
+
+
+ const handleBackToProducts = () => {
+  const fromCategory = location.state?.fromCategory;
+  if (fromCategory) {
+    navigate('/products', { state: { category: fromCategory } });
+  } else {
+    navigate('/products');
+  }
+};
+
+  const handleFavoriteClick = (product, e) => {
+    if (e) e.stopPropagation();
+
+    const newFavoriteState = toggleWishlist(product);
+    const isCurrentlyFavorite = isInWishlist(product.id); // Use this for popup
+
+    const message = newFavoriteState
+      ? t('wishlist.addedToFavorite')
+      : t('wishlist.removedFromFavorite');
+
+    // Clear any existing timeout
+    if (popupTimeoutRef.current) {
+      clearTimeout(popupTimeoutRef.current);
     }
+
+    setPopupMessage(message);
+    setPopupAnimation('fade-in');
+    setShowPopup(true);
+
+    popupTimeoutRef.current = setTimeout(() => {
+      setPopupAnimation('fade-out');
+
+      popupTimeoutRef.current = setTimeout(() => {
+        setShowPopup(false);
+        setPopupAnimation('');
+        popupTimeoutRef.current = null;
+      }, 300);
+    }, 1500);
   };
 
   // Handle RTL direction for Arabic
   useEffect(() => {
-    document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr'; 
+    document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
-  // This will be replaced with API call
+  // Cleanup timeouts on component unmount
+  useEffect(() => {
+    return () => {
+      if (popupTimeoutRef.current) {
+        clearTimeout(popupTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Fetch product data
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // For now: mock data
         const foundProduct = mockProducts.find(p => p.id === parseInt(id));
         setProduct(foundProduct);
       } catch (error) {
@@ -185,6 +214,7 @@ export default function ProductDetails() {
     fetchProduct();
   }, [id]);
 
+  // Image loading effect
   useEffect(() => {
     setImageLoaded(false);
     const timer = setTimeout(() => {
@@ -195,7 +225,7 @@ export default function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="products-loading">
+      <div className="pd-loading">
         <div className="thread-loader"></div>
       </div>
     );
@@ -211,8 +241,6 @@ export default function ProductDetails() {
       </div>
     );
   }
-
-  const availableWidths = [60, 90, 120, 150, 180, 210];
 
   return (
     <div className="pd-container">
@@ -235,16 +263,9 @@ export default function ProductDetails() {
           ))}
         </div>
 
-        {/* CENTER - Large Image with discount badge */}
+        {/* CENTER - Large Image */}
         <div className="pd-main-image-wrapper">
           <div className="pd-main-image-container">
-            {/* Discount badge - only shows if discount exists */}
-            {product.discount && product.discount > 0 && (
-              <div className="pd-discount-badge-on-image">
-                {t('productDetails.discount', { discount: product.discount })}
-              </div>
-            )}
-
             <img
               key={selectedImage}
               src={product.images[selectedImage]}
@@ -256,10 +277,12 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        {/* RIGHT - Product Info + Customization Table */}
+        {/* RIGHT - Product Info */}
         <div className="pd-info right-info">
           <div className="pd-header no-breadcrumb">
             <h1 className="pd-title">{product.name}</h1>
+
+
           </div>
 
           <p className="pd-description">{product.description}</p>
@@ -281,72 +304,38 @@ export default function ProductDetails() {
                 <strong><i className="fas fa-toolbox me-1"></i> {t('productDetails.careInstructions')}:</strong>
                 <span>{product.careInstructions}</span>
               </div>
-            </div>
-          </div>
-
-          {/* Customization Table - Only Width remains, Height is now text */}
-          <div className="pd-customization-table new-table">
-            <h3>
-              <i className="fas fa-ruler-combined me-2"></i>
-              {t('productDetails.customizeYourRug')}
-            </h3>
-
-            <div className="pd-table">
-              {/* Width */}
-              <div className="pd-table-row">
-                <div className="pd-table-label">
-                  <strong><i className="fas fa-arrows-alt-h me-1"></i> {t('productDetails.width')}:</strong>
-                  <span className="pd-table-hint">{t('productDetails.widthHint')}</span>
-                </div>
-                <div className="pd-table-inputs">
-                  <div className="pd-width-options">
-                    {availableWidths.map(w => (
-                      <button
-                        key={w}
-                        type="button"
-                        className={`pd-option-btn ${selectedWidth === w ? 'active' : ''}`}
-                        onClick={() => setSelectedWidth(w)}
-                      >
-                        {w}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+              <div className="pd-spec-item">
+                <strong><i className="fas fa-arrows-alt-h me-1"></i> {t('productDetails.width')}:</strong>
+                <span>{t('productDetails.widthHint')}</span>
               </div>
-
-              {/* Height - Changed to text only */}
-              <div className="pd-table-row">
-                <div className="pd-table-label">
-                  <strong><i className="fas fa-arrows-alt-v me-1"></i> {t('productDetails.height')}:</strong>
-                  <span className="pd-table-hint">{t('productDetails.heightHint')}</span>
-                </div>
-                <div className="pd-table-inputs">
-                  <div className="pd-height-text-info">
-                    <i className="fas fa-check-circle me-2"></i>
-                    <span>{t('productDetails.customHeightAvailable')}</span>
-                  </div>
-                </div>
+              <div className="pd-spec-item">
+                <strong><i className="fas fa-arrows-alt-v me-1"></i> {t('productDetails.height')}:</strong>
+                <span>{t('productDetails.heightHint')}</span>
               </div>
-
             </div>
+            <button
+              className={`pd-heart-btn ${isInWishlist(product.id) ? 'active' : ''}`}
+              onClick={() => handleFavoriteClick(product)}
+              aria-label={isInWishlist(product.id) ? t('productDetails.removeFromFavorite') : t('productDetails.addToFavorite')}
+            >
+              <i className={`${isInWishlist(product.id) ? 'fas text-danger' : 'far'} fa-heart`}></i>
+              <span className="pd-heart-text">
+                {isInWishlist(product.id) ? t('productDetails.removeFromFavorite') : t('productDetails.addToFavorite')}
+              </span>
+            </button>
           </div>
-
-          {/* Features */}
-          <div className="pd-features">
-            <h4><i className="fas fa-star me-2"></i> {t('productDetails.productFeatures')}</h4>
-            <div className="row">
-              {product.features.map((f, i) => (
-                <div key={i} className="col-md-6">
-                  <div className="pd-feature-item">
-                    <i className="fas fa-check me-2"></i>{f}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
       </div>
+
+      {/* Popup Message */}
+     {showPopup && (
+        <div className="pd-popup-overlay">
+          <div className={`pd-popup ${isInWishlist(product.id) ? 'pd-popup-success' : 'pd-popup-remove'} ${popupAnimation}`}>
+            <i className={`fas ${isInWishlist(product.id) ? 'fa-heart' : 'fa-heart-broken'} pd-popup-icon`}></i>
+            <span className="pd-popup-text">{popupMessage}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

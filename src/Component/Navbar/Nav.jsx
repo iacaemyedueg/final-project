@@ -2,11 +2,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageButton from "./LanguageButton";
+import { useWishlist } from "../../Context/WishlistContext";
 import "../Navbar/nav.css";
 
 export default function Nav() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { wishlistCount } = useWishlist(); 
   return (
     <>
       <header>
@@ -307,7 +309,7 @@ export default function Nav() {
 
               {/* Right */}
               <div className="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-end gap-3 fs-5">
-                <Link className="text-dark">
+                <Link className="text-dark" to="/Wishlist">
                   <i className="fa-solid fa-heart"></i>
                 </Link>
                 <Link className="text-dark">

@@ -1,20 +1,13 @@
 {
   "products": {
-    "title": "Our Products",
-    "filterBySize": "Filter by Size",
-    "size": "Size",
-    "showMore": "Show More",
-    "showLess": "Show Less",
-    "clearFilter": "Clear Filter",
-    "filteredBy": "Filtered by",
+    "title": "Products",
     "noProducts": "No products found",
     "noProductsMatch": "No products match the selected size filter.",
     "showing": "Showing",
     "of": "of",
     "total": "total",
-    "addToFavorite": "Add to Favorite",
-    "viewDetails": "View Details",
-    "discount": "-{{discount}}%"
+    "addedToFavorite": "Added to Wishlist!",
+    "removedFromFavorite": "Removed from Wishlist"
   },
   "common": {
     "close": "Close"
@@ -28,16 +21,18 @@
     "careInstructions": "Care Instructions",
     "customizeYourRug": "Customize Your Rug",
     "width": "Width (CM)",
-    "widthHint": "Choose one of the standard widths below",
+    "widthHint": "You can choose any width you want - contact us for details",
     "height": "Height (CM)",
-    "heightHint": "We craft to your exact height requirements",
-    "customHeightAvailable": "Custom height available - contact us for details",
+    "heightHint": "You can choose any height you want - contact us for details",
     "productFeatures": "Product Features",
     "viewImage": "View image {{number}}",
-    "discount": "-{{discount}}%"
+    "addToFavorite": "Add to Wishlist",
+    "removeFromFavorite": "Remove from Wishlist",
+    "addedToFavorite": "Added to Wishlist!",
+    "removedFromFavorite": "Removed from Wishlist"
   },
-    "heroTitle": "Al-Qamar factory",
-  "heroDesc": "Discover The Most Complete Blastic Mats Store",
+  "heroTitle": "Al-Qamar Factory",
+  "heroDesc": "Discover The Most Complete Plastic Mats Store",
   "heroBtn": "Explore Unique",
   "orderTracking": "Order Tracking",
   "myAccount": "My Account",
@@ -45,11 +40,25 @@
   "needHelp": "Need Help? Call Us",
   "home": "Home",
   "about": "About",
-  "shop ": "Shop ",
+  "shop": "Shop",
   "contact": "Contact",
-  "browseCategory ": "Browse All Category ",
+  "browseCategory": "Browse All Categories",
   "search": "Search For Items..",
-  "browse1":"House Mats",
-  "browse2":"Musque Mats",
-  "browse3":"Travel Mats"
+  "browse1": "House Mats",
+  "browse2": "Mosque Mats",
+  "browse3": "Travel Mats",
+  "wishlist": {
+    "title": "My Wishlist",
+    "clearAll": "Clear All",
+    "viewDetails": "View Details",
+    "emptyTitle": "Your Wishlist is Empty",
+    "emptyText": "Looks like you haven't added any products to your wishlist yet. Start exploring our collection!",
+    "addedToFavorite": "Added to wishlist!",
+    "removedFromFavorite": "Removed from wishlist"
+  },
+  "aboutSection": {
+    "title": "About Al-Qamar Plastic Mats & Export Factory",
+    "description": "A vision that brightens floors and quality that crosses borders. At Al-Qamar Factory for Plastic Mats & Export, we don’t see mats as simple floor covers—we see them as an extension of durability and practical elegance in daily life and global trade. We are a fully integrated Egyptian industrial entity built on a clear vision.",
+    "button": "Know More About Us"
+  }
 }

@@ -14,7 +14,7 @@ const categories = [
   { title: "House Mats", img: localImage(3), category: "Homes" },
   { title: "Travel Mats", img: localImage(25), category: "Travels" },
   { title: "Mosque Mats", img: localImage(27), category: "mosque" },
-  { title: "Modern Mats", img: localImage(30), category: "Homes" },
+  // { title: "Modern Mats", img: localImage(30), category: "Homes" },
   // { title: "MOSQUE", img: localImage(29), category: "mosque" },
   // { title: "TRAVELS", img: localImage(28), category: "Travels" },
 ];

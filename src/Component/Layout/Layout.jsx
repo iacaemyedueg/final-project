@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "../Navbar/Nav";
 import Footer from "../Footer/Footer";
+
 import "../Layout/Layout.css";
 // import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
